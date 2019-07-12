@@ -1,0 +1,4 @@
+Proportion,		Single,	Sub_seq,	Basic_seq,		Super_seq,	Sub_par,	Basic_par,	Super_par
+0_SUBORDINATE,	0.99,	0.88,		0.94,			0.91,		0.98,		0.96,		0.94
+1_BASIC,		0.48,	0.53,		0.9,			0.86,		0.11,		0.92,		0.85
+2_SUPERORDINATE,0.07,	0.03,		0.13,			0.75,		0.01,		0.15,		0.81

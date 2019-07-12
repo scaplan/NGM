@@ -1,0 +1,4 @@
+StdDev,			Single,	Sub_seq,	Basic_seq,		Super_seq,	Sub_par,	Basic_par,	Super_par
+0_SUBORDINATE,	0.04,	0.16,		0.22,			0.26,		0.05,		0.09,		0.17
+1_BASIC,		0.4,	0.36,		0.14,			0.26,		0.25,		0.20,		0.28
+2_SUPERORDINATE,0.16,	0.05,		0.12,			0.30,		0.03,		0.11,		0.24

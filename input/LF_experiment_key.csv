@@ -1,0 +1,20 @@
+exp,exp_recoded,one_3sub_label,blocking,order,timing,direct_replication_of,preregistered
+1,1,same,random,"""1-3""",simultaneous,XT E1/E2,Y
+2,7,same,random,"""1-3""",sequential,,Y
+3,4,different,blocked,"""3-1""",simultaneous,SPSS ES1/ES2,Y
+4,10,different,blocked,"""3-1""",sequential,SPSS E2/E3,Y
+5,2,same,random,"""1-3""",simultaneous,XT E1/E2,Y
+6,5,different,blocked,"""3-1""",simultaneous,,Y
+7,3,different,random,"""1-3""",simultaneous,,Y
+8,6,same,blocked,"""3-1""",simultaneous,,Y
+9,12,same,blocked,"""3-1""",sequential,,N
+10,8,different,random,"""1-3""",sequential,,N
+11,11,same,random,"""3-1""",sequential,,Y
+12,9,different,blocked,"""1-3""",sequential,,Y
+XT_adults_e1,XT_adults_e1,same,random,"""1-3""",simultaneous,,N
+XT_children_e2,XT_children_e2,same,random,"""1-3""",simultaneous,,N
+SPSS_e1,SPSS_e1,different,blocked,"""1-3""",simultaneous,,N
+SPSS_e2,SPSS_e2,different,blocked,"""3-1""",sequential,,N
+SPSS_e3,SPSS_e3,different,blocked,"""3-1""",sequential,,N
+SPSS_eS1,SPSS_eS1,different,blocked,"""3-1""",simultaneous,,N
+SPSS_eS2,SPSS_eS2,different,blocked,"""3-1""",simultaneous,,N

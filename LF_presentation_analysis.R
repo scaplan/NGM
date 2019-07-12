@@ -23,6 +23,9 @@ suppressMessages(library(tidyr))
 suppressMessages(library(forcats))
 suppressMessages(library(lmerTest))
 
+## Comment below to turn warning messages back on
+options(warn=-1)
+
 
 #########################
 #########################

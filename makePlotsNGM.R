@@ -25,12 +25,12 @@ suppressMessages(library(forcats))
 makePlot <- function(currData,outputname,currtitle) {
   currPlot <- ggplot(currData,aes(x=GeneralizationLevel, y=Prop, fill=source))+
     stat_summary(fun.y=mean, geom='bar',pos='dodge', width = 0.6)+
-    theme(plot.title = element_text(size=30,face = "bold"),                                        # plot title 
-          legend.title = element_text(size=26, face="bold"),                                       # legend title 
-          axis.title.x = element_text(size=26,angle=0,hjust=.5,vjust=0,face="bold"),               # x-axis title
-          axis.title.y = element_text(size=26,angle=90,hjust=.5,vjust=.5,face="bold"),             # y-axis title
-          legend.text = element_text(size = 26, face = "plain"),                                   # legend text
-          axis.text.x = element_text(size=26,angle = 40,colour="grey20",hjust=1,face="plain"),
+    theme(plot.title = element_text(size=42,face = "bold"),                                        # plot title 
+          legend.title = element_text(size=36, face="bold"),                                       # legend title 
+          axis.title.x = element_text(size=36,angle=0,hjust=.5,vjust=0,face="bold"),               # x-axis title
+          axis.title.y = element_text(size=36,angle=90,hjust=.5,vjust=.5,face="bold"),             # y-axis title
+          legend.text = element_text(size = 36, face = "plain"),                                   # legend text
+          axis.text.x = element_text(size=36,angle = 40,colour="grey20",hjust=1,face="plain"),
           legend.position="none")+    # x-axis text
     scale_fill_manual(values=c("orange3","grey31"),name="Source",labels=c("Human","NGM"))+  # fill colour and text
     geom_errorbar(aes(ymin=lowerError, ymax=upperError), width=.3, size=.5,position=position_dodge(.6))+

@@ -40,8 +40,8 @@ dsubset <- function (...) { return(droplevels(subset(...))) }
 ## Read in data
 #########################
 #########################
-sourceDir = '' # Fill this in with path to directory containing LF data
-outputDir = '' # Fill this in with path to desired output directory (for plots)
+sourceDir = '' # Fill this in with path to directory containing LF data (example\\NaiveGeneralizationModel\\input\\)
+outputDir = '' # Fill this in with path to desired output directory (example\\NaiveGeneralizationModel\\output\\)
 LF_metadata_file <- "LF_experiment_key.csv" 
 # We want to read in this file rather than 'all_data_munged_A.csv' in order to exclude duplicate participants
 inputFile = 'LF_no_dups_data_munged_A.csv'
@@ -112,15 +112,37 @@ data_clean_basicMeans <- data_clean %>%
 
 #########################
 #########################
+## Analyzing all data
+#########################
+#########################
+
+data_clean_basicMeans <- droplevels(data_clean_basicMeans)
+
+# Use rbind to center presentation_style and training_number for proper deviation coding (rather than dummy coding)
+contrasts(data_clean_basicMeans$presentation_style) <- rbind(-0.5, 0.5)
+colnames(contrasts(data_clean_basicMeans$presentation_style)) <- levels(contrasts(data_clean_basicMeans$presentation_style))[2]
+contrasts(data_clean_basicMeans$training_number) <- rbind(-0.5, 0.5)
+colnames(contrasts(data_clean_basicMeans$training_number)) <- levels(contrasts(data_clean_basicMeans$training_number))[2]
+contrasts(data_clean_basicMeans$order) <- rbind(-0.5, 0.5)
+colnames(contrasts(data_clean_basicMeans$order)) <- levels(contrasts(data_clean_basicMeans$order))[2]
+
+# treating basic-generalization as gradient outcome
+summary(lmer(prop_bas ~ presentation_style * training_number * order + (1|subids) + (1|stim_category), data=data_clean_basicMeans))
+
+# treating basic-generalization as binary outcome
+data_clean_basicMeans_binary = subset(data_clean_basicMeans, prop_bas != 0.5)
+summary(glmer(prop_bas ~ presentation_style * training_number * order + (1|subids) + (1|stim_category), data=data_clean_basicMeans_binary, family=binomial))
+summary(glmer(prop_bas ~ presentation_style * training_number * order + (1|stim_category), data=data_clean_basicMeans_binary, family=binomial))
+
+
+#########################
+#########################
 ## Looking at only the second-block trials
 #########################
 #########################
 
-#data_clean_basicMeans_secondBlock <- data_clean_basicMeans %>%
-#  filter((training_number == "three_subordinate" & order == "1-3") | (training_number == "one" & order == "3-1"))
 data_clean_basicMeans_secondBlock <- data_clean_basicMeans %>% as.data.frame %>%
   filter((training_number == "three_subordinate" & order == "1-3") | (training_number == "one" & order == "3-1"))
-
 
 # Use rbind to center presentation_style and training_number for proper deviation coding (rather than dummy coding)
 data_clean_basicMeans_secondBlock <- droplevels(data_clean_basicMeans_secondBlock)
@@ -130,17 +152,9 @@ contrasts(data_clean_basicMeans_secondBlock$training_number) <- rbind(-0.5, 0.5)
 colnames(contrasts(data_clean_basicMeans_secondBlock$training_number)) <- levels(contrasts(data_clean_basicMeans_secondBlock$training_number))[2]
 # Linear mixed model
 
-# summary(lmer(prop_bas ~ presentation_style * training_number + (1|subids) + (presentation_style * training_number|stim_category), data=data_clean_basicMeans_secondBlock))
-# If fails to converge with above.. try...
-
-summary(lmer(prop_bas ~ presentation_style * training_number + (1|subids) + (presentation_style|stim_category), data=data_clean_basicMeans_secondBlock))
+summary(lmer(prop_bas ~ presentation_style * training_number + (1|subids) + (1|stim_category), data=data_clean_basicMeans_secondBlock))
 # Nothing, not even training number has an effect on generalization in the second-block
 # It is important to only consider the first-block trials, since all major effects disappear in the second-block
-
-
-## All together
-summary(lmer(prop_bas ~ presentation_style * training_number + (1|subids) + (1|stim_category), data=data_clean_basicMeans))
-
 
 
 #########################
@@ -166,7 +180,7 @@ sequential_sub_data <- data_clean_basicMeans_firstBlock %>% as.data.frame %>%
 t.test(parallel_sub_data$prop_bas,sequential_sub_data$prop_bas)
 
 
-## Temporary check of "one" seq vs. par.
+## Check PSE for each training number individually
 parallel_one_data <- data_clean_basicMeans_firstBlock %>% as.data.frame %>% filter((presentation_style == "simultaneous" & training_number == "one"))
 sequential_one_data <- data_clean_basicMeans_firstBlock %>% as.data.frame %>% filter((presentation_style == "sequential" & training_number == "one"))
 t.test(parallel_one_data$prop_bas,sequential_one_data$prop_bas)
@@ -187,6 +201,8 @@ colnames(contrasts(data_clean_basicMeans_firstBlock_devCoded$training_number)) <
 
 # Linear mixed model
 summary(lmer(prop_bas ~ presentation_style * training_number + (1|subids) + (presentation_style * training_number|stim_category), data=data_clean_basicMeans_firstBlock_devCoded))
+summary(lmer(prop_bas ~ presentation_style * training_number + (1|subids) + (1|stim_category), data=data_clean_basicMeans_firstBlock_devCoded))
+
 
 # There is no benefit to including the interaction term between presentation-style and training number
 fullModelWithInteraction <- lmer(prop_bas ~ presentation_style * training_number + (1|subids) + (presentation_style * training_number|stim_category), data=data_clean_basicMeans_firstBlock_devCoded)
@@ -213,10 +229,7 @@ colnames(contrasts(data_clean_basicMeans_firstBlock_binScoring$presentation_styl
 contrasts(data_clean_basicMeans_firstBlock_binScoring$training_number) <- rbind(-0.5, 0.5)
 colnames(contrasts(data_clean_basicMeans_firstBlock_binScoring$training_number)) <- levels(contrasts(data_clean_basicMeans_firstBlock_binScoring$training_number))[2]
 
-# summary(glmer(prop_bas ~ presentation_style * training_number + (1|subids) + (presentation_style * training_number|stim_category), data=data_clean_basicMeans_firstBlock_binScoring, family=binomial))
-# In case failure to converge, try again without the random effect by interaction term..
-
-summary(glmer(prop_bas ~ presentation_style * training_number + (1|subids) + (presentation_style|stim_category), data=data_clean_basicMeans_firstBlock_binScoring, family=binomial))
+summary(glmer(prop_bas ~ presentation_style * training_number + (1|subids) + (1|stim_category), data=data_clean_basicMeans_firstBlock_binScoring, family=binomial))
 
 
 #########################

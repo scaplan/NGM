@@ -4,7 +4,7 @@
 
 ### Paper currently under review (link to manuscript when available)
 
-Please contact me with any questions: <spcaplan@sas.upenn.edu>
+Please contact me with any questions: <scaplan@gc.cuny.edu>
 
 ---
 

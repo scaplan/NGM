@@ -4,8 +4,8 @@
 #########################
 #########################
 ## Author: Spencer Caplan
-## Contact: spcaplan@sas.upenn.edu
-## University of Pennsylvania, Department of Linguistics
+## Contact: scaplan@gc.cuny.edu
+## CUNY Graduate Center
 #########################
 #########################
 

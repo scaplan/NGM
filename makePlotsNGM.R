@@ -2,8 +2,6 @@
 #########################
 #########################
 ## Spencer Caplan
-## University of Pennsylvania
-## spcaplan@sas.upenn.edu
 #########################
 #########################
 

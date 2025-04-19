@@ -3,8 +3,6 @@
 
 #
 #  Spencer Caplan
-#  spcaplan@sas.upenn.edu
-#  University of Pennsylvania
 #
 
 import sys, math

@@ -2,8 +2,6 @@
 #########################
 #########################
 ## Spencer Caplan
-## University of Pennsylvania
-## spcaplan@sas.upenn.edu
 #########################
 #########################
 
@@ -155,6 +153,11 @@ colnames(contrasts(data_clean_basicMeans_secondBlock$training_number)) <- levels
 summary(lmer(prop_bas ~ presentation_style * training_number + (1|subids) + (1|stim_category), data=data_clean_basicMeans_secondBlock))
 # Nothing, not even training number has an effect on generalization in the second-block
 # It is important to only consider the first-block trials, since all major effects disappear in the second-block
+
+# treating basic-generalization as binary outcome
+data_clean_basicMeans_secondBlock_binary = subset(data_clean_basicMeans_secondBlock, prop_bas != 0.5)
+summary(glmer(prop_bas ~ presentation_style * training_number * order + (1|subids) + (1|stim_category), data=data_clean_basicMeans_secondBlock_binary, family=binomial))
+summary(glmer(prop_bas ~ presentation_style * training_number * order + (1|stim_category), data=data_clean_basicMeans_secondBlock_binary, family=binomial))
 
 
 #########################

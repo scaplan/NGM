@@ -1,7 +1,5 @@
 /*
 *  Spencer Caplan
-*  spcaplan@sas.upenn.edu
-*  University of Pennsylvania
 */
 
 import java.util.*;

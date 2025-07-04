@@ -1,8 +1,6 @@
-## Code for "Word Learning as Category Formation" (Naive Generalization Model)
+## Code for the Naive Generalization Model
 
-### Spencer Caplan
-
-### Paper currently under review (link to manuscript when available)
+### Caplan S (2025) Word learning as category formation. PLOS ONE 20(7): e0327615. [https://doi.org/10.1371/journal.pone.0327615](https://doi.org/10.1371/journal.pone.0327615)
 
 Please contact me with any questions: <scaplan@gc.cuny.edu>
 
